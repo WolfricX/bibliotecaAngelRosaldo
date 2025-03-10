@@ -53,8 +53,11 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">bibliotecaAngelRosaldo</div>
             <div class="list-group list-group-flush">
-                <a href="/Home/Index" class="list-group-item list-group-item-action bg-light">Libros</a>
-                <a href="/Solicitud/MisSolicitudes" class="list-group-item list-group-item-action bg-light">Mis Solicitudes</a> <!-- Enlace agregado -->
+                <a href="/Usuario/Index" class="list-group-item list-group-item-action bg-light">Users</a>
+                <a href="/Categoria/Index" class="list-group-item list-group-item-action bg-light">Categorias</a>
+                <a href="/Libro/Index" class="list-group-item list-group-item-action bg-light">Libros</a>
+                <a href="/Solicitud/Index" class="list-group-item list-group-item-action bg-light">Solicitudes</a>
+                <a href="/Prestamo/Index" class="list-group-item list-group-item-action bg-light">Prestamo</a>
                 <!-- Agrega más enlaces según sea necesario -->
                 <form asp-action="Logout" asp-controller="Account" method="post" class="mt-2">
                     <button type="submit" class="btn btn-danger btn-block">Logout</button>
@@ -87,6 +90,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>

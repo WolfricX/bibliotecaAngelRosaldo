@@ -3,35 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace bibliotecaAngelRosaldo.Context
 {
-    public class AplicationDbContext
+    public class ApplicationDbContext : DbContext
     {
-        public class ApplicationDbContext : DbContext
-        {
-            public ApplicationDbContext(DbContextOptions options) : base(options) { }
-            //Modelos a mapear
-            public DbSet<Usuario> Usuarios { get; set; }
-            public DbSet<Rol> Roles { get; set; }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-                modelBuilder.Entity<Usuario>().HasData(
-                    new Usuario
-                    {
-                        PkUsuario = 1,
-                        Nombre = "Dano",
-                        UserName = "Usuario",
-                        Password = "12323",
-                        FkRol = 1
-                    }
-                    );
-                modelBuilder.Entity<Rol>().HasData(
-                    new Rol
-                    {
-                        PkRol = 1,
-                        Nombre = "Admin"
-                    });
+        // Modelos a mapear
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Rol> Roles { get; set; }
+        public DbSet<Libro> Libros { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<Solicitud> Solicitudes { get; set; }
 
-            }
-        }
     }
 }

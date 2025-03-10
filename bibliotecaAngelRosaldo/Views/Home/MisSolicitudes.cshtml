@@ -1,0 +1,39 @@
+﻿@model IEnumerable<bibliotecaAngelRosaldo.Models.Domain.Solicitud>
+@{
+    ViewData["Title"] = "Mis Solicitudes";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Mis Solicitudes</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Libro</th>
+                <th>Fecha de Solicitud</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var solicitud in Model)
+            {
+                <tr id="solicitud-@solicitud.PkSolicitud">
+                    <td>@solicitud.Libro.Titulo</td>
+                    <td>@solicitud.FechaSolicitud</td>
+                    <td>@solicitud.EstadoSolicitud</td>
+                    <td>
+                        @if (solicitud.EstadoSolicitud != "Prestamo Realizado")
+                        {
+                            <form asp-action="Eliminar" asp-controller="Solicitud" method="post">
+                                <input type="hidden" name="id" value="@solicitud.PkSolicitud" />
+                                <input type="hidden" name="returnUrl" value="@Url.Action("MisSolicitudes", "Solicitud")" />
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

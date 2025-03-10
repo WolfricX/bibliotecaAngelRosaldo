@@ -1,0 +1,45 @@
+﻿@model IEnumerable<bibliotecaAngelRosaldo.Models.Domain.Prestamo>
+
+@{
+    ViewData["Title"] = "Préstamos";
+    Layout = "_LayoutDashboard";
+}
+
+<h2>Préstamos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Libro</th>
+            <th>Fecha Préstamo</th>
+            <th>Fecha Devolución</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prestamo in Model)
+        {
+            <tr>
+                <td>@prestamo.PkPrestamo</td>
+                <td>@prestamo.Usuario.Nombre</td>
+                <td>@prestamo.Libro.Titulo</td>
+                <td>@prestamo.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                <td>@prestamo.FechaDevolucion?.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@prestamo.PkPrestamo" class="btn btn-warning">Editar</a>
+                    <form asp-action="Eliminar" asp-route-id="@prestamo.PkPrestamo" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                    @if (prestamo.FechaDevolucion == null)
+                    {
+                        <form asp-action="MarcarComoDevuelto" asp-route-id="@prestamo.PkPrestamo" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-success">Devuelto</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

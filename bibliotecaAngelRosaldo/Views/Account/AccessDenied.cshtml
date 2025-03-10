@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    Layout = "~/Views/Shared/_LayoutNoSidebar.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Acceso Denegado</h1>
+    <p class="text-center">No tienes permiso para acceder a esta página.</p>
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver a la página principal</a>
+    </div>
+</div>

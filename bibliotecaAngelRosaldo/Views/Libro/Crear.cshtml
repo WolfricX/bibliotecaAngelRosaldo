@@ -1,0 +1,49 @@
+﻿@model bibliotecaAngelRosaldo.Models.Domain.Libro
+@{
+    ViewData["Title"] = "Crear Libro";
+    Layout = "_LayoutDashboard";
+
+}
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Crear Nuevo Libro</h1>
+    <form asp-action="Crear" method="post">
+        <div class="form-group">
+            <label asp-for="Titulo" class="control-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Autor" class="control-label"></label>
+            <input asp-for="Autor" class="form-control" />
+            <span asp-validation-for="Autor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ISBN" class="control-label"></label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Disponible" class="control-label"></label>
+            <select asp-for="Disponible" class="form-control">
+                <option value="true">Disponible</option>
+                <option value="false">Agotado</option>
+            </select>
+            <span asp-validation-for="Disponible" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FkCategoria" class="control-label"></label>
+            <select asp-for="FkCategoria" class="form-control">
+                @foreach (var categoria in ViewBag.Categorias)
+                {
+                    <option value="@categoria.PkCategoria">@categoria.Nombre</option>
+                }
+            </select>
+            <span asp-validation-for="FkCategoria" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<bibliotecaAngelRosaldo.Models.Domain.Libro>
+@{
+    ViewData["Title"] = "Libros";
+    Layout = "_LayoutDashboard";
+
+}
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Libros</h1>
+    <div class="mb-3">
+        <a href="@Url.Action("Crear", "Libro")" class="btn btn-primary">Crear Nuevo Libro</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Disponible</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var libro in Model)
+            {
+                <tr>
+                    <td>@libro.Titulo</td>
+                    <td>@libro.Autor</td>
+                    <td>@libro.ISBN</td>
+                    <td>@(libro.Disponible ? "Disponible" : "Agotado")</td>
+                    <td>@libro.Categoria.Nombre</td>
+                    <td>
+                        <a href="@Url.Action("Editar", "Libro", new { id = libro.PkLibro })" class="btn btn-warning">Editar</a>
+                        <form asp-action="Eliminar" asp-controller="Libro" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@libro.PkLibro" />
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,8 +1,26 @@
-﻿@{
+﻿@model IEnumerable<bibliotecaAngelRosaldo.Models.Domain.Libro>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Libros Disponibles</h1>
+    <div class="row">
+        @foreach (var libro in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@libro.Titulo</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@libro.Autor</h6>
+                        <p class="card-text"><strong>ISBN:</strong> @libro.ISBN</p>
+                        <form asp-action="Solicitar" asp-controller="Solicitud" method="post">
+                            <input type="hidden" name="libroId" value="@libro.PkLibro" />
+                            <button type="submit" class="btn btn-primary">Solicitar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
